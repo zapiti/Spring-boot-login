@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Listar encomendas</title>
+    
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+    
+        <div class="col-sm-2 offset-sm-10">
+            <a th:href="@{/encomenda/relatorio}" title="exportar par PDF" class="btn btn-success "><i class="fa fa-file-pdf-o fa-2x "></i></a>
+            <a th:href="@{/encomenda/relatorio(format=xlsx)}" title="exportar par Excel" class="btn btn-success "><i class="fa fa-file-excel-o fa-2x "></i></a>
+ </div>
+ 
+ 
+     </div>
+     <div class="row">
+   
+        <div class="col-sm-9">
+        <table class="table btn-table" >
+            <thead>
+            <tr>
+         
+                <th>Id</th>
+                <th>valor</th>
+             <th>entrega</th>
+             
+                <th>bolo</th>
+                
+               <!--  <th>Sabores</th> --> 
+                <th>cobertura</th>
+                <th>kilo</th>
+                <th >Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="encomenda : ${encomendas}">
+            <th scope="row" th:text="${encomenda.id}">1</th>
+                <td th:text="${encomenda.valor}">big</td>
+              <!--   <td th:inline="text" th:if="${encomenda.ano}">[[2017 - ${encomenda.ano}]] anos ([[${encomenda.ano}]])</td>
+                <td th:inline="text" th:unless="${encomenda.ano}"> Não informado </td>--> 
+                <td th:text="${encomenda.entrega}?${#dates.format(encomenda.entrega, 'dd-MM-yyyy')}:''" >big</td>
+                <td th:text="${encomenda.bolo.nome}"></td>
+                 <td th:text="${encomenda.bolo.cobertura.nome}"></td>
+                  <td th:inline="text" th:if="${encomenda.valor}">[[ ${encomenda.valor}/35]] kilos </td>
+            <!--       <td th:text="${bolo.massa.cor}"></td>
+                 <td th:text="${bolo.tema.descricao}"></td>
+          <td th:text="${bolo.sabor.nome}"></td> -->
+                   
+ 
+
+                 
+               
+                <td>
+                <div >
+                    <div class="btn-group" role="group" aria-label="Ações">
+                        <a th:href="@{/encomenda/editar(id=${encomenda.id})}" class="btn btn-info btn-sm">Editar</a>
+                        <a th:href="@{/encomenda/excluir(id=${encomenda.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                    </div>
+                </td>
+                
+
+            </tr>
+            </tbody>
+        </table>
+          
+            
+            
+            
+            
+            
+        </div>
+     </div>
+     
+     
+     <div class="row">
+         <div class="col-sm-12">
+            <a th:href="@{/encomenda/novo}" class="btn btn-primary" >Novo</a>
+        </div>
+        
+        
+        
+        
+    </div>
+    
+ 
+</div>
+
+
+</body>
+</html>

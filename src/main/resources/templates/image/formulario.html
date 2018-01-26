@@ -1,0 +1,55 @@
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+      
+      
+      <head>
+    <meta charset="UTF-8"/>
+    <title>Formulario Filme</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row btn-table">
+	
+	<div th:if="${message}">
+		<h2 th:text="${message}"></h2>
+	</div>
+
+
+		<form method="POST" enctype="multipart/form-data" th:action="@{/image}"  >
+			<table>
+		
+			  
+			 
+				<tr>
+					<td>File to upload:</td>
+					<td><input type="file" name="file" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Upload" /></td>
+				</tr>
+			</table>
+	
+			
+		</form>
+	</div>
+
+	<div class=" btn-table">
+		<ul>
+			<li th:each="file : ${files}" ><a
+				th:href="@{/image/imagens(path=${file.name})}"> <img
+					th:src="@{/image/imagens(path=${file.name})}" height="120" width="130"/>
+			</a>
+			
+			<a th:href="@{/image/excluir/{nome}(nome=${file.name})}" >Excluir</a>
+			</li>
+			
+				
+		</ul>
+	</div>
+</div>
+</div>
+</body>
+</html>

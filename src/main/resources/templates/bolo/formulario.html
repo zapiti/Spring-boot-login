@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Formulario Filme</title>
+</head>
+<body>
+<div layout:fragment="content" >
+    <div class="row">
+        <div class="col-sm-12  btn-table">
+            <form th:action="@{/bolo/salvar}" th:object="${bolo}" method="post">
+                <input type="hidden" th:field="*{id}"/>
+                <div class="form-group">
+                    <label for="inputNome">Nome</label>
+                    <input type="text" class="form-control" id="inputNome" th:field="*{nome}"/>
+                    <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}" class="badge badge-danger" >erro</span>
+                </div>
+                <div class="form-group">
+                    <label for="inputPeso">Peso</label>
+                    <input type="number" class="form-control" id="inputPeso" th:field="*{peso}"/>
+                    <span  th:if="${#fields.hasErrors('peso')}" th:errors="*{peso}" class="badge badge-danger" >erro</span>
+                </div>
+                <div class="form-group">
+                    <label for="inputValor">Valor</label>
+                    <input type="number" class="form-control" id="inputValor" th:field="*{valor}"/>
+                    <span  th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}" class="badge badge-danger" >erro</span>
+                </div>
+                
+                
+                <div class="form-group">
+                    <label for="inputMassa">Massa</label>
+                    <select class="form-control" id="inputMassa" th:field="*{massa}">
+                        <option value="">Selecione a cor da Massa</option>
+                        <option th:each="massa : ${massas}" th:value="${massa.id}" th:text="${massa.cor}"></option>
+                    </select>
+                </div>
+                   <div class="form-group">
+                    <label for="inputTema">Tema</label>
+                    <select class="form-control" id="inputTema" th:field="*{tema}">
+                        <option value="">Selecione o tema</option>
+                        <option th:each="tema : ${temas}" th:value="${tema.id}" th:text="${tema.descricao}"></option>
+                    </select>
+                </div>
+                   <div class="form-group">
+                    <label for="inputCobertura">Cobertura</label>
+                    <select class="form-control" id="inputCobertura" th:field="*{cobertura}">
+                        <option value="">Selecione a cobertura</option>
+                        <option th:each="cobertura : ${coberturas}" th:value="${cobertura.id}" th:text="${cobertura.nome}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="inputSabor">Sabores</label>
+                    <select multiple="multiple" class="form-control" id="inputSabor" th:field="*{sabores}">
+                        <option th:each="sabor : ${sabores}" th:value="${sabor.id}" th:text="${sabor.nome}"></option>
+                    </select>
+                </div>
+                 
+                
+                
+                <a th:href="@{/bolo}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+    </div>
+      
+              
+    
+    
+</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Formulario encomenda</title>
+    
+    
+  
+    
+    
+</head>
+<body>
+
+
+
+
+<div layout:fragment="content">
+    <div class="row btn-table">
+        <div class="col-sm-12">
+            <form th:action="@{/encomenda/salvar}"  th:object="${encomenda}" method="post">
+         
+              <div class="form-group">
+                    <label for="inputbolo">bolo </label>
+                    <select class="form-control" id="inputBolo"  th:field="*{bolo}">
+                        <option value="">Selecione o bolo</option>
+                        <option th:each="bolo : ${bolos}" th:value="${bolo.id}" th:text="${bolo.nome}"></option>
+                       
+                    </select>
+                    
+                     <span  th:if="${#fields.hasErrors('bolo')}" th:errors="*{bolo}" class="badge badge-danger" >erro</span>
+                </div>
+                 <input type="hidden" th:field="*{id}"/>
+               <div class="form-group">
+                    <label for="inputNome">Peso:</label>
+                    
+                    
+                 <div style="margin-top: 5px;">
+				  <input th:field="*{valor}" class="calc-range m-top-20" type="range" min="35" max="700" onmouseover="ChangeStep();" id="mySlider"  step="35" th:value="35"  >
+				</div>
+
+			 
+			Kilo:	<lable  class="calc-total-price" >1</lable>kg
+				<br/>
+				Preço Total: 	<span class="calc-count" >35</span> reais
+				<br> Preço por Kilo: <span class="calc-price">35</span> reais
+				
+				<span  th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}" class="badge badge-danger" >erro</span>
+                
+                
+                </div>
+                 <div class="form-group">
+                    <label for="inputEntrega">entrega</label>
+                   <input th:field="*{entrega}" type="date"/>
+         
+                </div>
+                   
+                <a th:href="@{/encomenda}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+            
+             
+           
+
+
+        </div>
+        
+    </div>
+</div>
+</body>
+</html>

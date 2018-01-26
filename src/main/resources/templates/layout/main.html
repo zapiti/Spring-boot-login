@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Projeto CAKE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<!--   <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" /> --> 
+
+    <link rel="stylesheet" th:href="@{/css/font-awesome.min.css}" />
+     <link rel="stylesheet" th:href="@{/css/range.css}" />
+    <link rel="stylesheet" th:href="@{/css/star-rating.min.css}" />
+     <link rel="stylesheet" th:href="@{/css/itens.css}" />
+    <link rel="stylesheet" th:href="@{/themes/krajee-fa/theme.min.css}" />
+    <!-- baixar content -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.6/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"></script>
+<style type="text/css">
+.navbar 
+{
+    background-image: url(' /img/cake3.jpg');
+  background-repeat: repeat-x; 
+}
+
+.btn-pink, .btn-pink:hover,  .btn-pink:visited, .btn-pink:focus 
+, .open>.dropdown-toggle.btn-pink
+{
+background-color: hotPink!important;
+border-color: White;
+ color:White;
+}
+
+.btn-pink:active{
+background-color: magenta!important;
+}
+
+
+.btn-roxo, .btn-roxo:hover,  .btn-roxo:visited, .btn-roxo:focus 
+, .open>.dropdown-toggle.btn-roxo
+{
+background-color: blueViolet !important;
+border-color: White;
+ color:White;
+}
+
+.btn-roxo:active{
+background-color: darkMagenta!important;
+}
+ .navbar-toggler {
+    background-color:hotPink!important;
+  
+}
+.btn-table{
+background-color: rgba(237,0,145,0.7);
+color:white;
+}
+
+
+img {
+    opacity: 1.0;
+    filter: alpha(opacity=100); /* For IE8 and earlier */
+}
+body{ 
+  background: url(' /img/cupcake.jpg') ; 
+
+}
+
+</style>
+
+<style type="text/css">
+.search-text{
+  margin-top:20px;
+  background-color:rgba(250,250,250,0.8);
+  padding-top:40px;
+  padding-bottom:40px;
+
+  
+}
+  
+.search-text .input-search{
+  height:45px;
+  width:400px;
+  padding-left:20px;
+    color:#333;
+} 
+
+.search-text .btn-search{
+  background-color:rgba(237,0,145,0.95);
+  border:1px solid #FFF;
+  font-family:Roboto;
+  color:#FFF;
+  padding:11px 20px 11px 20px;
+}
+
+.search-text  .btn-search:hover{
+  background-color:#FFF;
+  color:#7dabdb;
+}
+
+
+.navbar-brand {
+  padding: 0px;
+}
+.navbar-brand>img {
+  height: 50%;
+  padding: 15px;
+  width: 120px;
+}
+
+
+</style>
+    
+</head>
+<body>
+  
+<nav class="navbar navbar-expand-md navbar-light  hidden-xs hidden-sm" >
+     <a class="navbar-brand" th:href="@{/}"><h2 style="color:#660066;text-shadow: 2px 2px #660099;">CakeDegust</h2>
+        </a>
+    <button class="navbar-toggler btn-danger " type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon "></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav nav-pills mr-auto  "th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}">
+        
+      
+            <li class="nav-item " >
+                <a class="nav-link btn-danger" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/cobertura') ? 'active':''}" th:href="@{/cobertura}" sec:authorize="!hasRole('ROLE_ANONYMOUS')" >Cobertura </a>
+            </li>
+            
+            <li class="nav-item" >
+                <a class="nav-link btn-danger" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/massa') ? 'active':''}" th:href="@{/massa}" sec:authorize="!hasRole('ROLE_ANONYMOUS')" >Massa</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link btn-danger"th:classappend="${#httpServletRequest.getRequestURI().startsWith('/sabor') ? 'active':''}" th:href="@{/sabor}"sec:authorize="!hasRole('ROLE_ANONYMOUS')" >Sabor</a>
+            </li>
+            
+            <li class="nav-item" >
+                <a class="nav-link btn-danger"th:classappend="${#httpServletRequest.getRequestURI().startsWith('/tema') ? 'active':''}" th:href="@{/tema}"sec:authorize="!hasRole('ROLE_ANONYMOUS')" >Tema</a>
+            </li>
+            
+             
+             <li class="nav-item" >
+                <a class="nav-link btn-danger" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/image') ? 'active':''}" th:href="@{/image}"sec:authorize="!hasRole('ROLE_ANONYMOUS')" >Image</a>
+            </li>
+           
+            
+  
+      </li>
+           
+
+            </ul>
+        
+        <ul class="nav nav-pills mr-auto ">
+        
+            <li class="nav-item " >
+                <a class="nav-link btn-danger" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/bolo') ? 'active':''}" th:href="@{/bolo}">Bolo </a>
+            </li>
+        <li class="nav-item" >
+                <a class="nav-link btn-danger" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/voto') ? 'active':''}" th:href="@{/voto}" >Favorite seu Bolo</a>
+            </li>
+              <li class="nav-item btn-danger" >
+                <a class="nav-link btn-danger" th:classappend="${#httpServletRequest.getRequestURI().startsWith('/encomenda') ? 'active':''}" th:href="@{/encomenda}">Encomenda</a>
+            </li>
+      
+        
+        
+        <li class="nav-item dropdown btn-danger">
+
+        <a class="nav-link dropdown-toggle btn-danger" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Mais
+        </a>
+        <div class="dropdown-menu btn-danger" aria-labelledby="navbarDropdown">
+        	<a class="dropdown-item btn-danger" th:href="@{/login}" >Logar</a>
+          <a class="dropdown-item btn-danger" th:href="@{/registration}" >Cadastre-se</a>
+          <a class="dropdown-item btn-danger"  th:href="@{/encomenda/lista}" th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}">Lista</a>
+          
+          <div class="dropdown-divider btn-danger"></div>
+          <a class="dropdown-item btn-danger" href="#">Sobre nos</a>
+        </div>
+        
+        
+        
+    		</ul>
+        
+        
+        <ul class="nav navbar-nav navbar-right">
+        <li>
+						<span style="color:BLANK ;font-size: 15pt" th:utext="${userName}"></span>
+					</li>	 
+						<li class="nav-item"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/login') ? 'active':''}">
+                		<div sec:authorize="hasRole('ROLE_ANONYMOUS')">
+                		<button class="btn btn-pink my-2 my-sm-0"  data-toggle="modal" data-target="#loginModal">login</button>
+                		</div>
+            </li>
+            <li class="nav-item"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/login') ? 'active':''}">
+                		<div sec:authorize="hasRole('ROLE_ANONYMOUS')">
+            <a class="btn btn-roxo my-2 my-sm-0"  th:href="@{/registration}" >Registre-se</a>
+           </div>
+            </li>
+            <li class="nav-item"  th:classappend="${#httpServletRequest.getRequestURI().startsWith('/') ? 'active':''}">
+            <div sec:authorize="!hasRole('ROLE_ANONYMOUS')" >
+         
+	<a th:href="@{/logout}" class="btn btn-danger my-2 my-sm-0" >Sign Out</a>
+            </div>
+            </li>
+						
+					</ul>
+
+    </div>
+</nav>
+
+<div class="container">
+    <div layout:fragment="content"></div>
+</div>
+<script th:src="@{/js/jquery-3.2.1.min.js}"  type="text/javascript"></script>
+<script th:src="@{/js/range.js}"  type="text/javascript"></script>
+<script th:src="@{/js/star-rating.min.js}"  type="text/javascript"></script>
+<script th:src="@{/themes/krajee-fa/theme.min.js}" type="text/javascript"></script>
+<script th:src="@{/js/locales/pt-BR.js}"  type="text/javascript"></script>
+<script type="text/javascript">
+     $(function() {
+      $('.kv-ltr-theme-fa-star').rating({
+            hoverOnClear: false,
+            theme: 'krajee-fa',
+            step: 1,
+            language: 'pt-BR'
+        });
+    });
+</script>
+		<!-- MODAIS -->	
+				<!-- The Modal -->
+				<div class="modal fade" id="loginModal">
+				  <div class="modal-dialog">
+				      <div class="modal-content">
+				        <div class="modal-header">
+				          
+				          <h4 class="modal-title">Login</h4>
+				          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				        </div>
+				        <div class="modal-body">
+				
+				          <form th:action="@{/login}" method="POST" class="form-signin">
+				      <h3 class="form-signin-heading" >Bem-vindo</h3>
+				      <br/>
+				       <label for="InputEmail">Email:</label>
+				      <input type="text" id="email" name="email"  th:placeholder="Email"
+				        class="form-control" /> <br/> 
+				         <label for="Inputpassword">Senha:</label>
+				      <input type="password"  th:placeholder="Password"
+				        id="password" name="password" class="form-control" /> <br /> 
+				        
+				      <div align="center" th:if="${param.error}">
+				        <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+				      </div>
+				      <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit" th:text="Login">Log-in</button>
+				    </form>
+				  
+				     </div>
+				    
+				    <div class="modal-body">
+				    <p class="text-right"><a  th:href="@{/registration}"  >Registre-se</a></p>
+				    </div>
+				        <div class="modal-footer">
+				          <a href="#" data-dismiss="modal" class="btn">Close</a>
+				        
+				        </div>
+				      </div>
+				    </div>
+				</div>
+				
+				  <!-- and modal-->
+				
+			
+
+
+</body>
+</html>

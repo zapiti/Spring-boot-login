@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Listar sabores</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+      <form th:action="@{/sabor/buscar}" method="get">
+    <input type="text" name="nome"/>
+    <button type="submit">buscar</button>
+</form>
+    
+        <div class="col-sm-12">
+        <table class="table btn-table">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nome</th>
+             
+                <th >Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="sabor, iter: ${sabores}">
+                <th scope="row" th:text="${sabor.id}">1</th>
+                <td th:text="${sabor.nome}"></td>
+   
+                <td>
+                    <div class="btn-group" role="group" aria-label="Ações" >
+                        <a th:href="@{/sabor/editar(id=${sabor.id})}" class="btn btn-info btn-sm">Editar</a>
+                        <a th:href="@{/sabor/excluir(id=${sabor.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <a th:href="@{/sabor/novo}" class="btn btn-primary" >Novo</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

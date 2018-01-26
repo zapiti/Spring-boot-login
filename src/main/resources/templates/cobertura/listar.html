@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Listar coberturas</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+    
+      <form th:action="@{/cobertura/buscar}" method="get">
+    <input type="text" name="nome"/>
+    <button type="submit">buscar</button>
+</form>
+        <div class="col-sm-12">
+            <table class="table btn-table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>tipo</th>
+                    <th >Ações</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cobertura, iter: ${coberturas}">
+                    <th scope="row" th:text="${cobertura.id}">1</th>
+                    <td th:text="${cobertura.nome}"></td>
+                    <td th:text="${cobertura.tipo}"></td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Ações" >
+                            <a th:href="@{/cobertura/editar(id=${cobertura.id})}" class="btn btn-info btn-sm">Editar</a>
+                            <a th:href="@{/cobertura/excluir(id=${cobertura.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <a th:href="@{/cobertura/novo}" class="btn btn-primary" >Novo</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

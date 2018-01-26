@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Votação</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row btn-table">
+        <div class="col-sm-12">
+            <form th:action="@{/voto/salvar}"  th:object="${voto}" method="post">
+         
+              <div class="form-group">
+                    <label for="inputbolo">bolo </label>
+                    <select class="form-control" id="inputBolo"  th:field="*{bolo}">
+                        <option value="">Selecione o bolo</option>
+                        <option th:each="bolo : ${bolos}" th:value="${bolo.id}" th:text="${bolo.nome}"></option>
+                       
+                    </select>
+                     <span  th:if="${#fields.hasErrors('bolo')}" th:errors="*{bolo}" class="badge badge-danger" >erro</span>
+                </div>
+                
+                <div class="form-group">
+                    <input name="voto" class="kv-ltr-theme-fa-star rating-loading"  data-size="sm" th:field="*{qtd_voto}"/>
+                <span  th:if="${#fields.hasErrors('qtd_voto')}" th:errors="*{qtd_voto}" class="badge badge-danger" >erro</span>
+                </div>
+                <a th:href="@{/voto}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+            
+             
+            
+        </div>
+       
+ 
+        
+        
+    </div>
+</div>
+</body>
+</html>

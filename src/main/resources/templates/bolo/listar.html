@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Listar bolos</title>
+    
+</head>
+<body>
+
+
+
+<div layout:fragment="content">
+<div class="search-text" align="center"> 
+       <div class="container" >
+   
+         
+           <div class="form" >
+                <form id="search-form" class="form-search " th:action="@{/bolo/buscar}" method="get">
+                    <input type="text" class="input-search" placeholder="Bolo"name="nome"/>
+                    <button type="submit" class="btn-search"><i class="fa fa-search" aria-hidden="true"></i>
+					<span class="hidden-xs"> Buscar</span></button>
+      </form>
+          </div>         
+       </div>     
+  </div>
+    <div class="row">
+    
+
+
+    
+        <div class="col-sm-2 offset-sm-10" th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}">
+            <a th:href="@{/bolo/relatorio}" title="exportar par PDF" class="btn btn-success "><i class="fa fa-file-pdf-o fa-2x "></i></a>
+            <a th:href="@{/bolo/relatorio(format=xlsx)}" title="exportar par Excel" class="btn btn-success "><i class="fa fa-file-excel-o fa-2x "></i></a>
+ </div>
+     </div>
+     
+   
+ 
+     <div class="row">
+  
+        <div class="col-sm-12">
+        <table class="table btn-table">
+            <thead>
+            <tr>
+          
+             
+                <th>Bolos</th>
+              
+            </tr>
+            </thead>
+            <tbody>
+          
+            
+            
+            
+            <tr th:each="bolo : ${bolos}">
+            <th><img th:src="@{/image/imagens(path=${bolo.nome+'.jpg'})}" height="300" width="400"/>
+             <br>
+             <span th:text="${bolo.mediaAvaliacao}"></span>
+                   <br></br>
+             		<span class="fa fa-star " th:classappend="${bolo.mediaAvaliacao >=1 } ? 'checked'"></span>
+					<span class="fa fa-star " th:classappend="${bolo.mediaAvaliacao >=2 } ? 'checked'"></span>
+					<span class="fa fa-star " th:classappend="${bolo.mediaAvaliacao >=3 } ? 'checked'"></span>
+					<span class="fa fa-star" th:classappend="${bolo.mediaAvaliacao >=4 } ? 'checked'"></span>
+					<span class="fa fa-star" th:classappend="${bolo.mediaAvaliacao >=5 } ? 'checked'"></span>
+				
+            </th>
+        <td>        
+        		<div></div>
+               <h4> <div th:text="${bolo.nome}">Nome do bolo</div></h4> 
+             	<div><b>Cobertura:</b></div>
+               	 <div  th:text="${bolo.cobertura.nome}"></div>
+               	<div><b>Massa:</b></div>
+                 <div th:text="${bolo.massa.cor}"></div>
+                <div><b>Tema:</b></div>
+                 <div  th:text="${bolo.tema.descricao}"></div>
+     			<div><b>Sabores:</b></div>
+         <div th:each="sabor: ${bolo.sabores}" th:text="${sabor.nome}"></div>
+       </td>
+                   
+ 
+
+               <td>
+                   <a th:href="@{/encomenda}" class="btn btn-info btn-sm">Encomenda</a>
+   
+                     <a th:href="@{/voto}" class="btn btn-roxo btn-sm">favorite</a>
+          <!--  <a th:href="@{/bolo/encomenda(nome=${bolo.nome})}" class="btn btn-info btn-sm">Encomendar</a>
+                 -->            
+               </td>  
+               
+                <td>
+                <div th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}">
+                    <div class="btn-group" role="group" aria-label="Ações">
+                        <a th:href="@{/bolo/editar(id=${bolo.id})}" class="btn btn-info btn-sm">Editar</a>
+                        <a th:href="@{/bolo/excluir(id=${bolo.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                    </div>
+                    </div>
+                </td>
+                
+
+            </tr>
+            </tbody>
+        </table>
+          
+            
+             <nav aria-label="Page navigation example ">
+                <ul class="pagination">
+                    <li class="page-item" th:classappend="${!bolos.hasPrevious()}? 'disabled'">
+                       <a class="page-link" th:href="@{/bolo(page=${bolos.getNumber()-1},size=${bolos.getSize()})}">Anterior</a>
+                   </li>
+                   <li class="page-item" th:classappend="${i == bolos.getNumber()}? 'active'"
+                        th:each="i : ${#numbers.sequence( 0, bolos.getTotalPages()-1)}">
+                       <a class="page-link"
+                          th:href="@{/bolo(page=${i},size=${bolos.getSize()})}"
+                          th:text="${i+1}">1</a>
+                   </li>
+                   <li class="page-item" th:classappend="${!bolos.hasNext()}? 'disabled'">
+                        <a class="page-link"
+                         th:href="@{/bolo(page=${bolos.getNumber()+1},size=${bolos.getSize()})}">Proxima</a>
+                    </li>
+               </ul>
+            </nav>
+            
+            
+            
+            
+        </div>
+     </div>
+     
+     
+     <div class="row" th:if="${ #authorization.expression('isAuthenticated()') and #strings.contains(#authentication.principal.authorities,'ADMIN')}">
+         <div class="col-sm-12">
+            <a th:href="@{/bolo/novo}" class="btn btn-primary" >Novo</a>
+        </div>
+        
+        
+        
+        
+    </div>
+    
+ 
+</div>
+
+
+</body>
+</html>

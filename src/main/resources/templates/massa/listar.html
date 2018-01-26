@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Listar Massas</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+     <form th:action="@{/massa/buscar}" method="get">
+    <input type="text" name="cor"/>
+    <button type="submit">buscar</button>
+</form>
+    
+    
+        <div class="col-sm-12">
+            <table class="table btn-table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                 <!--     <th >Ações</th> -->
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="massa, iter: ${massas}">
+                    <th scope="row" th:text="${massa.id}">1</th>
+                    <td th:text="${massa.cor}"></td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Ações" >
+                            <a th:href="@{/massa/editar(id=${massa.id})}" class="btn btn-info btn-sm">Editar</a>
+                            <a th:href="@{/massa/excluir(id=${massa.id})}" class="btn btn-danger btn-sm">Excluir</a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <a th:href="@{/massa/novo}" class="btn btn-primary" >Novo</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

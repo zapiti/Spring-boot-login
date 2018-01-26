@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/main">
+
+<head>
+    <title>Projeto filmes</title>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous"/>
+</head>
+<body>
+<div layout:fragment="content" >
+
+    <div class="row" >
+        <div class="col-sm-12">
+	
+
+	
+	<div class="container">
+		<div class="row btn-table">
+	
+	<div class="container">
+		<!--  <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="100" height="100" alt="Logo" />-->
+		  <form th:action="@{/login}" method="POST" class="form-signin">
+				      <h3 class="form-signin-heading" >Logar</h3>
+				      <br/>
+				      
+				       <label for="InputEmail">Email:</label>
+				      <input type="text" id="email" name="email"  th:placeholder="Email"
+				        class="form-control" /> <br/> 
+				         <label for="Inputpassword">Senha:</label>
+				      <input type="password"  th:placeholder="Password"
+				        id="password" name="password" class="form-control" /> <br /> 
+				      
+				      <div align="center" th:if="${param.error}">
+				        <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+				      </div>
+				      <br/>
+				      		    <p class="text-right"><a  th:href="@{/registration}"  >Registre-se</a></p>
+				      <button class="btn btn-lg btn-primary " name="Submit" value="Login" type="Submit" th:text="Logar" >Log-in</button>
+				      <a  class="btn btn-lg btn-secondary "   type="button"  th:href="@{/}">Voltar</a>
+				    </form>
+				  
+	</div>
+	</div>
+	</div>
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>
