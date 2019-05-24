@@ -112,7 +112,7 @@ xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
                        <a class="page-link" th:href="@{/bolo(page=${bolos.getNumber()-1},size=${bolos.getSize()})}">Anterior</a>
                    </li>
                    <li class="page-item" th:classappend="${i == bolos.getNumber()}? 'active'"
-                        th:each="i : ${#numbers.sequence( 0, bolos.getTotalPages()-1)}">
+                        th:each="i : ${#numbers.sequence( 0, bolos.getTotalPages())}">
                        <a class="page-link"
                           th:href="@{/bolo(page=${i},size=${bolos.getSize()})}"
                           th:text="${i+1}">1</a>

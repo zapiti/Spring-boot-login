@@ -9,4 +9,5 @@ import com.una.model.Role;
 public interface RoleRepository extends JpaRepository<Role, Integer>{
 	Role findByRole(String role);
 
+
 }

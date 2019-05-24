@@ -2,6 +2,10 @@ package com.una.configuration;
 
 import javax.sql.DataSource;
 
+import com.una.controller.LoginController;
+import com.una.model.User;
+import com.una.service.UserService;
+import com.una.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
+
 	
 	@Value("${spring.queries.users-query}")
 	private String usersQuery;
@@ -37,7 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.
 			jdbcAuthentication()
 				.usersByUsernameQuery(usersQuery)
-				.authoritiesByUsernameQuery(rolesQuery) 
+				.authoritiesByUsernameQuery(rolesQuery)
                
 				.dataSource(dataSource)
 				.passwordEncoder(bCryptPasswordEncoder) ;
@@ -71,5 +76,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	       .ignoring()
 	       .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
 	}
+
+
+
 
 }

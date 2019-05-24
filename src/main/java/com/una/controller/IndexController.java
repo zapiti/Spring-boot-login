@@ -1,5 +1,6 @@
 package com.una.controller;
 
+import com.una.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -26,7 +27,6 @@ public class IndexController {
 	//@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/")
     public String list() {
-
         return "redirect:/bolo";
     }
 	@RequestMapping(value="/teste", method = RequestMethod.GET)

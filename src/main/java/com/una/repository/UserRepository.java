@@ -8,4 +8,6 @@ import com.una.model.User;
 @Repository("userRepository")
 public interface UserRepository extends JpaRepository<User, Long> {
 	 User findByEmailIgnoreCase(String email);
+
+	boolean existsByActive(int i);
 }
